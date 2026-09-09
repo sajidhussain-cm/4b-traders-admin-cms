@@ -47,26 +47,6 @@ export default async function HomePage() {
   </div>
 )}
 
-  <Navbar />
-
- {/* HERO */}
-<HeroSlider
-  banners={[
-    homepage.hero_banner_1,
-    homepage.hero_banner_2,
-    homepage.hero_banner_3,
-    homepage.hero_banner_4,
-    homepage.hero_banner_5,
-  ]}
-  title={homepage.hero_title || "STEP INTO ELEGANCE"}
-  subtitle={
-    homepage.hero_subtitle ||
-    "Discover stylish khussa & jutti for women and kids."
-  }
-  buttonText={homepage.hero_button_text || "Shop Now"}
-  buttonLink={homepage.hero_button_link || "/products"}
-/>
-
       {/* CATEGORIES */}
       {categories.length > 0 && (
         <section className="max-w-6xl mx-auto px-6 py-16">
