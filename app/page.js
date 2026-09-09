@@ -1,3 +1,4 @@
+import HeroSlider from "../components/HeroSlider";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
@@ -10,7 +11,27 @@ export default async function HomePage() {
 
   return (
    <>
- {homepage.banner_text && (
+ <Navbar />
+
+{/* HERO */}
+<HeroSlider
+  banners={[
+    homepage.hero_banner_1,
+    homepage.hero_banner_2,
+    homepage.hero_banner_3,
+    homepage.hero_banner_4,
+    homepage.hero_banner_5,
+  ]}
+  title={homepage.hero_title || "STEP INTO ELEGANCE"}
+  subtitle={
+    homepage.hero_subtitle ||
+    "Discover stylish khussa & jutti for women and kids."
+  }
+  buttonText={homepage.hero_button_text || "Shop Now"}
+  buttonLink={homepage.hero_button_link || "/products"}
+/>
+
+{homepage.banner_text && (
   <div className="bg-maroon text-cream overflow-hidden py-2.5">
     <div className="whitespace-nowrap animate-marquee">
       <span className="mx-8 text-sm md:text-base tracking-wide">
@@ -28,25 +49,23 @@ export default async function HomePage() {
 
   <Navbar />
 
-  {/* HERO — content is fully editable from /admin/homepage */}
-      <section className="relative bg-maroon text-cream">
-        <div className="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h1 className="font-serif text-4xl md:text-5xl leading-tight mb-4">
-              {homepage.hero_title || "Timeless Elegance, Handcrafted for You"}
-            </h1>
-            <p className="text-cream/80 mb-8">
-              {homepage.hero_subtitle || "Discover our premium jutti & khussa collection"}
-            </p>
-            <a href={homepage.hero_button_link || "/products"} className="btn-outline inline-block">
-              {homepage.hero_button_text || "Shop Now"}
-            </a>
-          </div>
-          {homepage.hero_image && (
-            <img src={homepage.hero_image} alt="Hero" className="rounded-sm shadow-xl" />
-          )}
-        </div>
-      </section>
+ {/* HERO */}
+<HeroSlider
+  banners={[
+    homepage.hero_banner_1,
+    homepage.hero_banner_2,
+    homepage.hero_banner_3,
+    homepage.hero_banner_4,
+    homepage.hero_banner_5,
+  ]}
+  title={homepage.hero_title || "STEP INTO ELEGANCE"}
+  subtitle={
+    homepage.hero_subtitle ||
+    "Discover stylish khussa & jutti for women and kids."
+  }
+  buttonText={homepage.hero_button_text || "Shop Now"}
+  buttonLink={homepage.hero_button_link || "/products"}
+/>
 
       {/* CATEGORIES */}
       {categories.length > 0 && (
