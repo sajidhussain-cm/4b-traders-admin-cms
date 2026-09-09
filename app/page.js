@@ -1,4 +1,5 @@
 import HeroSlider from "../components/HeroSlider";
+import FlashSaleCountdown from "../components/FlashSaleCountdown";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
@@ -46,6 +47,31 @@ export default async function HomePage() {
     </div>
   </div>
 )}
+{/* FLASH SALE */}
+{homepage.flash_sale_enabled &&
+  homepage.flash_sale_title &&
+  homepage.flash_sale_end && (
+    <section className="bg-cream border-y border-maroon/10 py-14 md:py-20">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+
+        <p className="text-maroon uppercase tracking-[0.3em] text-xs md:text-sm font-medium">
+          Limited Time
+        </p>
+
+        <h2 className="font-serif text-4xl md:text-6xl text-maroon mt-3">
+          {homepage.flash_sale_title}
+        </h2>
+
+        {homepage.flash_sale_subtitle && (
+          <p className="text-charcoal/70 mt-4 max-w-xl mx-auto">
+            {homepage.flash_sale_subtitle}
+          </p>
+        )}
+
+       <FlashSaleCountdown endDate={homepage.flash_sale_end} />
+      </div>
+    </section>
+  )}
 
       {/* CATEGORIES */}
       {categories.length > 0 && (
