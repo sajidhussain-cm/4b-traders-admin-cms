@@ -23,6 +23,11 @@ const empty = {
   banner_button_text: "",
   banner_button_link: "",
 
+  flash_sale_enabled: false,
+  flash_sale_title: "",
+  flash_sale_subtitle: "",
+  flash_sale_end: "",
+
   featured_product_ids: [],
 };
 
@@ -348,7 +353,80 @@ export default function AdminHomepagePage() {
             </div>
           </div>
         </div>
+        {/* FLASH SALE */}
+        <div className="admin-card space-y-4">
+          <h2 className="font-medium text-charcoal">
+            Flash Sale
+          </h2>
 
+          <p className="text-xs text-gray-400">
+            Control the flash sale shown on the homepage. Keep it disabled
+            until the offer is officially active.
+          </p>
+
+          <label className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              checked={form.flash_sale_enabled}
+              onChange={(e) =>
+                updateField("flash_sale_enabled", e.target.checked)
+              }
+            />
+            <span className="text-sm text-charcoal">
+              Enable Flash Sale
+            </span>
+          </label>
+
+          <div>
+            <label className="admin-label">
+              Sale Title
+            </label>
+
+            <input
+              className="admin-input"
+              value={form.flash_sale_title || ""}
+              onChange={(e) =>
+                updateField("flash_sale_title", e.target.value)
+              }
+              placeholder="Weekend Clearance Sale"
+            />
+          </div>
+
+          <div>
+            <label className="admin-label">
+              Sale Description
+            </label>
+
+            <textarea
+              className="admin-input"
+              rows={2}
+              value={form.flash_sale_subtitle || ""}
+              onChange={(e) =>
+                updateField("flash_sale_subtitle", e.target.value)
+              }
+              placeholder="Limited time offer on selected styles."
+            />
+          </div>
+
+          <div>
+            <label className="admin-label">
+              Sale End Date & Time
+            </label>
+
+            <input
+              type="datetime-local"
+              className="admin-input"
+              value={form.flash_sale_end || ""}
+              onChange={(e) =>
+                updateField("flash_sale_end", e.target.value)
+              }
+            />
+
+            <p className="text-xs text-gray-400 mt-1">
+              Set the exact date and time when the sale should end.
+            </p>
+          </div>
+        </div>
         {/* FEATURED PRODUCTS */}
         <div className="admin-card space-y-3">
           <h2 className="font-medium text-charcoal">

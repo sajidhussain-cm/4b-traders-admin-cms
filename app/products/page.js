@@ -4,10 +4,22 @@ import ProductCard from "../../components/ProductCard";
 import { getAllProducts, getCategories, getSettings } from "../../lib/publicData";
 
 export default async function ProductsPage({ searchParams }) {
-  const categoryId = searchParams?.category;
-  const [products, categories, settings] = await Promise.all([
-    getAllProducts({ categoryId }), getCategories(), getSettings(),
-  ]);
+ const categoryParam = searchParams?.category;
+const style = searchParams?.style;
+
+const [categories, settings] = await Promise.all([
+  getCategories(),
+  getSettings(),
+]);
+
+const categoryId =
+  categoryParam === "ladies"
+    ? categories.find((c) => c.name === "Ladies Khussa")?.id
+    : categoryParam === "kids"
+    ? categories.find((c) => c.name === "Kid's Khussa")?.id
+    : categoryParam;
+
+const products = await getAllProducts({ categoryId, style });
 
   return (
     <>

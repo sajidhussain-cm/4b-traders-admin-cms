@@ -7,7 +7,7 @@ import ImageUpload from "./ImageUpload";
 
 const emptyProduct = {
   name: "", description: "", price: "", sale_price: "", category_id: "",
-  sku: "", sizes: "", colors: "", stock: "0", images: [],
+  style: "", sku: "", sizes: "", colors: "", stock: "0", images: [],
   featured: false, new_arrival: false, active: true,
 };
 
@@ -76,6 +76,7 @@ export default function ProductForm({ productId }) {
       price: parseFloat(form.price) || 0,
       sale_price: form.sale_price ? parseFloat(form.sale_price) : null,
       category_id: form.category_id || null,
+      style: form.style || null,
       sku: form.sku,
       sizes: form.sizes.split(",").map((s) => s.trim()).filter(Boolean),
       colors: form.colors.split(",").map((s) => s.trim()).filter(Boolean),
@@ -129,6 +130,20 @@ export default function ProductForm({ productId }) {
                 {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
             </div>
+            <div>
+  <label className="admin-label">Style</label>
+  <select
+    className="admin-input"
+    value={form.style || ""}
+    onChange={(e) => update("style", e.target.value)}
+  >
+    <option value="">— Select Style —</option>
+    <option value="Bridal">Bridal</option>
+    <option value="Embroidered">Embroidered</option>
+    <option value="Classic">Classic</option>
+    <option value="Festive">Festive</option>
+  </select>
+</div>
             <div>
               <label className="admin-label">SKU</label>
               <input className="admin-input" value={form.sku || ""} onChange={(e) => update("sku", e.target.value)} />
