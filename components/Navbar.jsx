@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCart } from "./CartContext";
 
-export default function Navbar() {
+function NavbarContent() {
   const { items } = useCart();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -270,5 +270,13 @@ export default function Navbar() {
         </nav>
       )}
     </header>
+  );
+}
+
+export default function Navbar() {
+  return (
+    <Suspense fallback={null}>
+      <NavbarContent />
+    </Suspense>
   );
 }
