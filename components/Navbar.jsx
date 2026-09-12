@@ -12,8 +12,10 @@ function NavbarContent() {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const count = items.reduce((n, i) => n + i.qty, 0);
-  const closeMenu = () => setMenuOpen(false);
+  const count = items.reduce(
+    (sum, item) => sum + (item.quantity || 0),
+    0
+  );
 
   const menuItems = [
     { name: "NEW IN", href: "/products" },
@@ -84,8 +86,10 @@ function NavbarContent() {
     return false;
   };
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-gold/30 shadow-sm">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#d8e9e6] shadow-sm">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="min-h-[82px] md:min-h-[92px] flex items-center justify-between gap-5">
 
@@ -103,7 +107,7 @@ function NavbarContent() {
           </Link>
 
           {/* DESKTOP MENU */}
-          <nav className="hidden md:flex flex-1 items-center justify-center gap-3 lg:gap-5 xl:gap-7">
+          <nav className="hidden md:flex flex-1 items-center justify-center gap-2 lg:gap-3 xl:gap-4">
             {menuItems.map((item) => {
               const active = isActive(item);
 
@@ -112,59 +116,23 @@ function NavbarContent() {
                   key={item.name}
                   href={item.href}
                   className={`
-                    group relative
-                    py-4 px-1
+                    px-3 lg:px-3.5 xl:px-4
+                    py-2.5
+                    rounded-full
                     text-[10px] lg:text-[11px] xl:text-xs
-                    font-medium
-                    tracking-[0.16em]
-                    whitespace-nowrap
+                 font-medium
+font-[Manrope]
+tracking-[0.1em]
+whitespace-nowrap
                     transition-all duration-300
                     ${
                       active
-                        ? "text-[#4a1717]"
-                        : "text-[#3b3530] hover:text-[#4a1717]"
+                        ? "bg-[#6FA9A2] text-white shadow-sm"
+                        : "text-[#252525] hover:bg-[#E8F7F4] hover:text-[#5F9891]"
                     }
                   `}
                 >
-                  <span className="relative z-10">
-                    {item.name}
-                  </span>
-
-                  {/* ACTIVE / HOVER UNDERLINE */}
-                  <span
-                    className={`
-                      absolute
-                      left-1/2
-                      -bottom-0.5
-                      h-px
-                      bg-[#a8875b]
-                      transition-all duration-300
-                      ${
-                        active
-                          ? "w-full -translate-x-1/2 opacity-100"
-                          : "w-0 -translate-x-1/2 opacity-0 group-hover:w-full group-hover:opacity-100"
-                      }
-                    `}
-                  />
-
-                  {/* ACTIVE / HOVER DOT */}
-                  <span
-                    className={`
-                      absolute
-                      -bottom-2.5
-                      left-1/2
-                      w-1 h-1
-                      rounded-full
-                      bg-[#a8875b]
-                      -translate-x-1/2
-                      transition-all duration-300
-                      ${
-                        active
-                          ? "opacity-100"
-                          : "opacity-0 group-hover:opacity-100"
-                      }
-                    `}
-                  />
+                  {item.name}
                 </Link>
               );
             })}
@@ -177,7 +145,7 @@ function NavbarContent() {
             <Link
               href="/products"
               aria-label="Search products"
-              className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full text-maroon hover:bg-white hover:shadow-sm transition-all duration-300"
+              className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full text-[#252525] hover:bg-[#E8F7F4] hover:text-[#6FA9A2] transition-all duration-300"
             >
               <svg
                 width="19"
@@ -196,7 +164,7 @@ function NavbarContent() {
             <Link
               href="/cart"
               aria-label="Shopping cart"
-              className="relative w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full text-maroon hover:bg-white hover:shadow-sm transition-all duration-300"
+              className="relative w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full text-[#252525] hover:bg-[#E8F7F4] hover:text-[#6FA9A2] transition-all duration-300"
             >
               <svg
                 width="20"
@@ -212,7 +180,7 @@ function NavbarContent() {
               </svg>
 
               {count > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-maroon text-cream text-[9px] flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#6FA9A2] text-white text-[9px] flex items-center justify-center">
                   {count}
                 </span>
               )}
@@ -222,7 +190,7 @@ function NavbarContent() {
             <button
               type="button"
               onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden w-9 h-9 flex items-center justify-center text-maroon text-xl"
+              className="md:hidden w-9 h-9 flex items-center justify-center text-[#252525] text-xl"
               aria-label="Toggle menu"
             >
               {menuOpen ? "✕" : "☰"}
@@ -233,8 +201,8 @@ function NavbarContent() {
 
       {/* MOBILE MENU */}
       {menuOpen && (
-        <nav className="md:hidden border-t border-gold/30 bg-cream px-6 py-3 shadow-sm">
-          <div className="flex flex-col">
+        <nav className="md:hidden border-t border-[#d8e9e6] bg-white px-6 py-3 shadow-sm">
+          <div className="flex flex-col gap-1">
             {menuItems.map((item) => {
               const active = isActive(item);
 
@@ -244,24 +212,19 @@ function NavbarContent() {
                   href={item.href}
                   onClick={closeMenu}
                   className={`
-                    relative
-                    py-4
+                    py-3.5 px-4
+                    rounded-lg
                     text-xs
                     font-medium
                     tracking-[0.16em]
-                    border-b border-maroon/10
                     transition-all duration-300
                     ${
                       active
-                        ? "text-[#4a1717] pl-3"
-                        : "text-[#3b3530] hover:text-[#4a1717]"
+                        ? "bg-[#6FA9A2] text-white shadow-sm"
+                        : "text-[#252525] hover:bg-[#E8F7F4] hover:text-[#5F9891]"
                     }
                   `}
                 >
-                  {active && (
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-[#a8875b]" />
-                  )}
-
                   {item.name}
                 </Link>
               );

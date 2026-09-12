@@ -13,10 +13,15 @@ const empty = {
   hero_button_link: "",
 
   hero_banner_1: "",
+  hero_banner_1_link: "",
   hero_banner_2: "",
+  hero_banner_2_link: "",
   hero_banner_3: "",
+  hero_banner_3_link: "",
   hero_banner_4: "",
+  hero_banner_4_link: "",
   hero_banner_5: "",
+  hero_banner_5_link: "",
 
   banner_text: "",
   banner_image: "",
@@ -29,6 +34,9 @@ const empty = {
   flash_sale_end: "",
 
   featured_product_ids: [],
+  bulk_hero_image: "",
+  individual_section_image: "",
+  bulk_section_image: "",
 };
 
 export default function AdminHomepagePage() {
@@ -205,6 +213,28 @@ export default function AdminHomepagePage() {
                         />
                       </div>
                     )}
+
+                    <div className="mt-3">
+                      <label className="admin-label">
+                        Banner Link
+                      </label>
+
+                      <input
+                        className="admin-input"
+                        value={form[`${field}_link`] || ""}
+                        onChange={(e) =>
+                          updateField(
+                            `${field}_link`,
+                            e.target.value
+                          )
+                        }
+                        placeholder="/products or /products?style=Festive"
+                      />
+
+                      <p className="text-xs text-gray-400 mt-1">
+                        When this banner is clicked, customers will open this link.
+                      </p>
+                    </div>
                   </div>
                 );
               })}
@@ -240,6 +270,7 @@ export default function AdminHomepagePage() {
 
           {/* HERO BUTTON */}
           <div className="grid grid-cols-2 gap-4">
+
             <div>
               <label className="admin-label">
                 Button Text
@@ -274,6 +305,7 @@ export default function AdminHomepagePage() {
                 placeholder="/products"
               />
             </div>
+
           </div>
         </div>
 
@@ -318,6 +350,7 @@ export default function AdminHomepagePage() {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
+
             <div>
               <label className="admin-label">
                 Button Text
@@ -351,10 +384,118 @@ export default function AdminHomepagePage() {
                 }
               />
             </div>
+
           </div>
         </div>
+
+        {/* BULK & WHOLESALE HERO */}
+        <div className="admin-card space-y-4">
+
+          <h2 className="font-medium text-charcoal">
+            Bulk & Wholesale Hero
+          </h2>
+
+          <p className="text-xs text-gray-400">
+            Upload the banner image that will appear at the top of the Bulk & Wholesale page.
+          </p>
+
+          <div>
+            <label className="admin-label">
+              Bulk Hero Image
+            </label>
+
+            <ImageUpload
+              onUploaded={(url) =>
+                updateField("bulk_hero_image", url)
+              }
+            />
+
+            {form.bulk_hero_image && (
+              <div className="mt-3">
+                <img
+                  src={form.bulk_hero_image}
+                  alt="Bulk & Wholesale Hero"
+                  className="w-full aspect-video object-cover rounded"
+                />
+              </div>
+            )}
+          </div>
+
+        </div>
+
+        {/* BULK & INDIVIDUAL HOMEPAGE CARDS */}
+        <div className="admin-card space-y-5">
+
+          <div>
+            <h2 className="font-medium text-charcoal">
+              Bulk & Individual Homepage Cards
+            </h2>
+
+            <p className="text-xs text-gray-400 mt-1">
+              Upload separate images for the two compact homepage cards. You can change these anytime from here.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5">
+
+            {/* INDIVIDUAL CARD */}
+            <div className="space-y-3">
+
+              <label className="admin-label">
+                Individual Card Image
+              </label>
+
+              <ImageUpload
+                onUploaded={(url) =>
+                  updateField(
+                    "individual_section_image",
+                    url
+                  )
+                }
+              />
+
+              {form.individual_section_image && (
+                <img
+                  src={form.individual_section_image}
+                  alt="Individual card"
+                  className="w-full aspect-[16/7] object-cover rounded"
+                />
+              )}
+
+            </div>
+
+            {/* BULK CARD */}
+            <div className="space-y-3">
+
+              <label className="admin-label">
+                Bulk & Wholesale Card Image
+              </label>
+
+              <ImageUpload
+                onUploaded={(url) =>
+                  updateField(
+                    "bulk_section_image",
+                    url
+                  )
+                }
+              />
+
+              {form.bulk_section_image && (
+                <img
+                  src={form.bulk_section_image}
+                  alt="Bulk and wholesale card"
+                  className="w-full aspect-[16/7] object-cover rounded"
+                />
+              )}
+
+            </div>
+
+          </div>
+        </div>
+
         {/* FLASH SALE */}
         <div className="admin-card space-y-4">
+
           <h2 className="font-medium text-charcoal">
             Flash Sale
           </h2>
@@ -365,16 +506,22 @@ export default function AdminHomepagePage() {
           </p>
 
           <label className="flex items-center gap-3">
+
             <input
               type="checkbox"
               checked={form.flash_sale_enabled}
               onChange={(e) =>
-                updateField("flash_sale_enabled", e.target.checked)
+                updateField(
+                  "flash_sale_enabled",
+                  e.target.checked
+                )
               }
             />
+
             <span className="text-sm text-charcoal">
               Enable Flash Sale
             </span>
+
           </label>
 
           <div>
@@ -386,7 +533,10 @@ export default function AdminHomepagePage() {
               className="admin-input"
               value={form.flash_sale_title || ""}
               onChange={(e) =>
-                updateField("flash_sale_title", e.target.value)
+                updateField(
+                  "flash_sale_title",
+                  e.target.value
+                )
               }
               placeholder="Weekend Clearance Sale"
             />
@@ -402,7 +552,10 @@ export default function AdminHomepagePage() {
               rows={2}
               value={form.flash_sale_subtitle || ""}
               onChange={(e) =>
-                updateField("flash_sale_subtitle", e.target.value)
+                updateField(
+                  "flash_sale_subtitle",
+                  e.target.value
+                )
               }
               placeholder="Limited time offer on selected styles."
             />
@@ -418,7 +571,10 @@ export default function AdminHomepagePage() {
               className="admin-input"
               value={form.flash_sale_end || ""}
               onChange={(e) =>
-                updateField("flash_sale_end", e.target.value)
+                updateField(
+                  "flash_sale_end",
+                  e.target.value
+                )
               }
             />
 
@@ -426,9 +582,12 @@ export default function AdminHomepagePage() {
               Set the exact date and time when the sale should end.
             </p>
           </div>
+
         </div>
+
         {/* FEATURED PRODUCTS */}
         <div className="admin-card space-y-3">
+
           <h2 className="font-medium text-charcoal">
             Featured Products
           </h2>
@@ -443,18 +602,23 @@ export default function AdminHomepagePage() {
             </p>
           ) : (
             <div className="grid sm:grid-cols-2 gap-2 max-h-80 overflow-y-auto">
+
               {products.map((p) => (
                 <label
                   key={p.id}
                   className="flex items-center gap-2 text-sm border border-gray-100 rounded p-2"
                 >
+
                   <input
                     type="checkbox"
                     checked={form.featured_product_ids.includes(p.id)}
-                    onChange={() => toggleFeatured(p.id)}
+                    onChange={() =>
+                      toggleFeatured(p.id)
+                    }
                   />
 
                   <span className="w-8 h-8 bg-gray-100 rounded overflow-hidden shrink-0">
+
                     {p.images?.[0] && (
                       <img
                         src={p.images[0]}
@@ -462,15 +626,19 @@ export default function AdminHomepagePage() {
                         alt=""
                       />
                     )}
+
                   </span>
 
                   <span className="truncate">
                     {p.name}
                   </span>
+
                 </label>
               ))}
+
             </div>
           )}
+
         </div>
 
         <div>
