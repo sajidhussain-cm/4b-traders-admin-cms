@@ -23,11 +23,11 @@ export default function HeroSlider({
 
   if (validBanners.length === 0) {
     return (
-      <section className="relative h-[560px] md:h-[680px] overflow-hidden bg-[#f8f4ee]">
+      <section className="relative w-full aspect-[16/9] md:h-[680px] md:aspect-auto overflow-hidden bg-[#f8f4ee]">
         <div className="absolute inset-0 flex items-center justify-center">
           <a
             href={buttonLink || "/products"}
-            className="inline-block bg-[#4a1717] text-white px-8 py-3.5 text-xs uppercase tracking-[0.18em] hover:bg-[#641f1f] transition shadow-sm"
+            className="inline-block bg-[#4a1717] text-white px-7 py-3 md:px-8 md:py-3.5 text-[11px] md:text-xs uppercase tracking-[0.18em] hover:bg-[#641f1f] transition shadow-sm"
           >
             {buttonText || "SHOP NOW"}
           </a>
@@ -37,7 +37,7 @@ export default function HeroSlider({
   }
 
   return (
-    <section className="relative h-[560px] md:h-[680px] overflow-hidden bg-[#f8f4ee]">
+    <section className="relative w-full aspect-[16/9] md:h-[680px] md:aspect-auto overflow-hidden bg-[#f8f4ee]">
       {validBanners.map((image, index) => {
         const bannerLink =
           bannerLinks[index] || buttonLink || "/products";
@@ -61,12 +61,10 @@ export default function HeroSlider({
               className="w-full h-full object-cover"
             />
 
-            {/* Soft readability overlay */}
             <div className="absolute inset-0 bg-black/5" />
 
-            {/* Shop Now button */}
-            <div className="absolute left-6 md:left-12 bottom-16 md:bottom-20">
-              <span className="inline-block bg-[#4a1717] text-white px-8 py-3.5 text-xs uppercase tracking-[0.18em] hover:bg-[#641f1f] transition shadow-sm">
+            <div className="absolute left-5 md:left-12 bottom-5 md:bottom-20">
+              <span className="inline-block bg-[#4a1717] text-white px-6 py-3 md:px-8 md:py-3.5 text-[10px] md:text-xs uppercase tracking-[0.18em] hover:bg-[#641f1f] transition shadow-sm">
                 {buttonText || "SHOP NOW"}
               </span>
             </div>
@@ -74,7 +72,6 @@ export default function HeroSlider({
         );
       })}
 
-      {/* PREVIOUS */}
       {validBanners.length > 1 && (
         <>
           <button
@@ -88,13 +85,12 @@ export default function HeroSlider({
                   validBanners.length
               );
             }}
-            className="absolute left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#3f3530]/30 text-[#3f3530] bg-white/50 backdrop-blur-sm hover:bg-white transition"
+            className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full border border-[#3f3530]/30 text-[#3f3530] bg-white/60 backdrop-blur-sm hover:bg-white transition"
             aria-label="Previous banner"
           >
             ←
           </button>
 
-          {/* NEXT */}
           <button
             type="button"
             onClick={(e) => {
@@ -105,14 +101,13 @@ export default function HeroSlider({
                 (current + 1) % validBanners.length
               );
             }}
-            className="absolute right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-[#3f3530]/30 text-[#3f3530] bg-white/50 backdrop-blur-sm hover:bg-white transition"
+            className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full border border-[#3f3530]/30 text-[#3f3530] bg-white/60 backdrop-blur-sm hover:bg-white transition"
             aria-label="Next banner"
           >
             →
           </button>
 
-          {/* DOTS */}
-          <div className="absolute bottom-7 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          <div className="absolute bottom-3 md:bottom-7 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 md:gap-2">
             {validBanners.map((_, index) => (
               <button
                 key={index}
@@ -125,8 +120,8 @@ export default function HeroSlider({
                 aria-label={`Go to banner ${index + 1}`}
                 className={`h-1.5 rounded-full transition-all ${
                   index === current
-                    ? "w-10 bg-[#b89b72]"
-                    : "w-5 bg-[#3f3530]/30"
+                    ? "w-8 md:w-10 bg-[#b89b72]"
+                    : "w-4 md:w-5 bg-[#3f3530]/30"
                 }`}
               />
             ))}
